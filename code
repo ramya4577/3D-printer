@@ -1,0 +1,26 @@
+#define stepPin 2    // Step signal
+#define dirPin 3     // Direction signal
+#define enablePin 8  // Enable motor driver
+
+void setup() {
+  pinMode(stepPin, OUTPUT);
+  pinMode(dirPin, OUTPUT);
+  pinMode(enablePin, OUTPUT);
+
+  digitalWrite(enablePin, LOW); // Enable driver (LOW to enable on A4988)
+  
+  // Set direction
+  digitalWrite(dirPin, HIGH);  // HIGH for one direction, LOW for the other
+}
+
+void loop() {
+  // Move 200 steps = 1 rotation (depends on step angle and microstepping)
+  for (int i = 0; i < 200; i++) {
+    digitalWrite(stepPin, HIGH);
+    delayMicroseconds(800);  // Speed control
+    digitalWrite(stepPin, LOW);
+    delayMicroseconds(800);
+  }
+
+  delay(1000); // Wait 1 sec before next move
+}
